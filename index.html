@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Feedback Form</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-image: url(delicious-indian-thali-with-naan-bread-rice.jpg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .container {
+      display: flex;
+      width: 95%;
+      max-width: 1200px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(7px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .side {
+      flex: 1;
+    }
+
+    .side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .center {
+      flex: 1.2;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: transparent;
+    }
+
+    .center h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2b1d0c;
+      font-weight: 900;
+    }
+
+    .feedback-form label {
+      font-size: 15px;
+      color: #333;
+      display: block;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
+    .feedback-form input,
+    .feedback-form select,
+    .feedback-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: #f9f9f9;
+      transition: 0.3s;
+    }
+
+    .feedback-form input:focus,
+    .feedback-form select:focus,
+    .feedback-form textarea:focus {
+      border-color: #d67d00;
+      outline: none;
+      background-color: #fff;
+    }
+
+    .feedback-form button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #d67d00;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .feedback-form button:hover {
+      background-color: #b25f00;
+    }
+
+    .thankyou-message {
+      text-align: center;
+      margin-top: 20px;
+      color: #2b1d0c;
+      font-size: 18px;
+      display: none;
+      line-height: 1.6;
+      animation: fadeIn 0.7s ease-in;
+    }
+
+    .thankyou-message b {
+      font-size: 20px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ✅ Mobile Responsive */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        width: 95%;
+        box-shadow: none;
+      }
+
+      .side {
+        display: none;
+      }
+
+      .center {
+        width: 100%;
+        padding: 25px 20px;
+        border-radius: 0;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .center h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+
+      .feedback-form label {
+        font-size: 14px;
+      }
+
+      .feedback-form input,
+      .feedback-form select,
+      .feedback-form textarea {
+        font-size: 13px;
+        padding: 9px;
+      }
+
+      .feedback-form button {
+        padding: 10px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="side left">
+      <img src="high-angle-indian-food-assortment.jpg" alt="Restaurant Image Left">
+    </div>
+
+    <div class="center">
+      <h2 id="formTitle">Drop your thoughts here 💬🍽️</h2>
+
+      <form class="feedback-form" id="feedbackForm">
+        <label for="food">How was the food?</label>
+        <select id="food" required>
+          <option value="">Select one</option>
+          <option>Excellent</option>
+          <option>Good</option>
+          <option>Average</option>
+          <option>Poor</option>
+        </select>
+
+        <label for="service">How was the service?</label>
+        <select id="service" required>
+          <option value="">Select one</option>
+          <option>Excellent</option>
+          <option>Good</option>
+          <option>Average</option>
+          <option>Poor</option>
+        </select>
+
+        <label for="comments">Any suggestions?</label>
+        <textarea id="comments" rows="4" placeholder="Share your thoughts..."></textarea>
+
+        <button type="submit">Submit Feedback</button>
+      </form>
+
+      <div class="thankyou-message" id="thankyouMessage">
+        <b>Thanks for your response!</b><br>
+        We appreciate your time ❤️
+      </div>
+    </div>
+
+    <div class="side right">
+      <img src="pre-prepared-food-showcasing-ready-eat-delicious-meals-go (1).jpg" alt="Restaurant Image Right">
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const message = document.getElementById('thankyouMessage');
+    const title = document.getElementById('formTitle');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.style.display = 'none';
+      title.style.display = 'none';
+      message.style.display = 'block';
+    });
+  </script>
+</body>
+
+</html>
